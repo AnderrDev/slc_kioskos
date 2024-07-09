@@ -22,6 +22,10 @@ const TransactionTable: React.FC = () => {
         setShowDifferencesOnly(event.target.checked);
     };
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault(); // Prevenir comportamiento predeterminado del formulario
+    };
+
     const filteredData = kioscosData.filter(kiosco => {
         return (
             (nameFilter === '' || kiosco.nombre.toLowerCase().includes(nameFilter.toLowerCase())) &&
@@ -41,7 +45,7 @@ const TransactionTable: React.FC = () => {
             </Button>
             <Collapse in={isOpen}>
                 <div id="transaction-table-collapse">
-                    <Form className="filter-form">
+                    <Form className="filter-form" onSubmit={handleSubmit}>
                         <Form.Group controlId="nameFilter">
                             <Form.Label className='mx-2 my-3'>Filtrar por Nombre de Kiosco</Form.Label>
                             <Form.Control
